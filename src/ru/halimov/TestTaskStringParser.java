@@ -2,21 +2,27 @@ package ru.halimov;
 
 public class TestTaskStringParser {
     //Результирующие данные
-    StringBuilder stringBuilder = new StringBuilder();
+    StringBuilder result = new StringBuilder();
 
     public static void main(String[] arg) {
 
         //Test
         //String str = "4[3[x]y]k12[abc]";
-        TestTaskStringParser testTaskStringParser = new TestTaskStringParser();
 
+        TestTaskStringParser testTaskStringParser = new TestTaskStringParser();
         for (String line : arg) {
             System.out.println(testTaskStringParser.parseString(line));
         }
     }
 
     public String parseString(String str) {
-        stringBuilder = new StringBuilder("");
+
+        if (!validString(str)) {
+            System.out.println("Неверный формат строки");
+            return "";
+        }
+
+        result = new StringBuilder("");
 
         char[] strArr = str.toCharArray();
         int startIndex = 0;
@@ -90,15 +96,39 @@ public class TestTaskStringParser {
 
                 //Если символ, то просто добавляю к остальным
             } else if (strArr[i] > '9') {
-                stringBuilder.append(strArr[i]);
+                result.append(strArr[i]);
             }
         }
-        return stringBuilder.toString();
+        return result.toString();
     }
 
     private void repeatString(String str, int amount) {
         for (int i = 0; i < amount; i++) {
-            stringBuilder.append(str);
+            result.append(str);
         }
+    }
+
+    private boolean validString(String str) {
+        if (str == null || str.isEmpty()) return false;
+
+        //Количество открывающихся скобок должно быть равно количество закрывающихся
+        int amount = 0;
+        char[] strChar = str.toCharArray();
+
+        if (strChar[0] == '[') return false;
+
+        for (int i = 0; i < strChar.length; i++) {
+            if (strChar[i] == '[') {
+
+                if (!Character.isDigit(strChar[i - 1])) return false;
+
+                amount++;
+
+            } else if (strChar[i] == ']') {
+                amount--;
+            }
+        }
+
+        return amount == 0;
     }
 }
