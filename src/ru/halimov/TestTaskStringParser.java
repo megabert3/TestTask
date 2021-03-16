@@ -7,7 +7,7 @@ public class TestTaskStringParser {
     public static void main(String[] arg) {
 
         //Test
-        //String str = "4[3[x]y]k12[abc]";
+        //String str = "4[3[x]y]k12[abc]k";
 
         TestTaskStringParser testTaskStringParser = new TestTaskStringParser();
 
@@ -38,7 +38,7 @@ public class TestTaskStringParser {
                 int amountRepeat;
                 int offset = 1;
 
-                //Получаю колличество числовых знаков
+                //Получаю количество числовых знаков
                 while (startIndex - offset >= 0) {
 
                     if (strArr[startIndex - offset] >= '0' && strArr[startIndex - offset] <= '9') {
@@ -47,7 +47,6 @@ public class TestTaskStringParser {
                         break;
                     }
                 }
-
 
                 amountRepeat = Integer.parseInt(str.substring(startIndex - offset + 1, startIndex));
 
@@ -60,7 +59,7 @@ public class TestTaskStringParser {
 
                         repeatString(str.substring(startIndex + 1, endIndex), amountRepeat);
 
-                        //Смещаю итератор на значение не распарсеной строки
+                        //Смещаю итератор на значение не распарсенной строки
                         i = endIndex;
                         break;
 
