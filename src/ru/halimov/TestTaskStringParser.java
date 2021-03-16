@@ -10,6 +10,7 @@ public class TestTaskStringParser {
         //String str = "4[3[x]y]k12[abc]";
 
         TestTaskStringParser testTaskStringParser = new TestTaskStringParser();
+
         for (String line : arg) {
             System.out.println(testTaskStringParser.parseString(line));
         }
@@ -25,8 +26,8 @@ public class TestTaskStringParser {
         result = new StringBuilder("");
 
         char[] strArr = str.toCharArray();
-        int startIndex = 0;
-        int endIndex = 0;
+        int startIndex;
+        int endIndex;
 
         for (int i = 0 ; i < strArr.length; i++) {
 
@@ -70,7 +71,7 @@ public class TestTaskStringParser {
                         int count = 2;
                         int localIndex = j + 1;
 
-                        //Ищу крайниюю скобку соответствующую первой
+                        //ищу крайниюю скобку соответствующую первой
                         while (count != 0) {
 
                             if (strArr[localIndex] == ']') {
@@ -95,7 +96,7 @@ public class TestTaskStringParser {
                 }
 
                 //Если символ, то просто добавляю к остальным
-            } else if (strArr[i] > '9') {
+            } else if (strArr[i] < '0' || strArr[i] > '9') {
                 result.append(strArr[i]);
             }
         }
@@ -120,6 +121,7 @@ public class TestTaskStringParser {
         for (int i = 0; i < strChar.length; i++) {
             if (strChar[i] == '[') {
 
+                //Если перед открывающей скобкой не цифра
                 if (!Character.isDigit(strChar[i - 1])) return false;
 
                 amount++;
