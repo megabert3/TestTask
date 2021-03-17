@@ -1,5 +1,8 @@
 package ru.halimov;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class TestTaskStringParser {
     //Результирующие данные
     StringBuilder result;
@@ -120,9 +123,14 @@ public class TestTaskStringParser {
         int amount = 0;
         char[] strChar = str.toCharArray();
 
+        Matcher matcher = Pattern.compile("[^A-Za-z0-9\\[\\]]").matcher(str);
+
+        if (matcher.find()) return false;
+
         if (strChar[0] == '[') return false;
 
         for (int i = 0; i < strChar.length; i++) {
+
             if (strChar[i] == '[') {
 
                 //Если перед открывающей скобкой не цифра
