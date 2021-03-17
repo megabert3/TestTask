@@ -2,7 +2,7 @@ package ru.halimov;
 
 public class TestTaskStringParser {
     //Результирующие данные
-    StringBuilder result = new StringBuilder();
+    StringBuilder result;
 
     public static void main(String[] arg) {
 
@@ -108,6 +108,11 @@ public class TestTaskStringParser {
         }
     }
 
+    /**
+     * Проверяет входную строку для парсинга на валидность
+     * @param str
+     * @return
+     */
     private boolean validString(String str) {
         if (str == null || str.isEmpty()) return false;
 
