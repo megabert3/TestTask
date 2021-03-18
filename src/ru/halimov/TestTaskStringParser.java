@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class TestTaskStringParser {
     //Результирующие данные
-    StringBuilder result;
+    private StringBuilder result;
 
     public static void main(String[] arg) {
 
